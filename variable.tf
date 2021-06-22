@@ -59,7 +59,7 @@ variable "codebuild_role_arn" {
 
 ### BUILD ENVS
 
-variable "ENVIRONMENT" {
+variable "environment" {
   description = "Environment in which the script is run. Eg: develop, main, etc"
   type        = string
   default     = "develop"
