@@ -54,3 +54,40 @@ variable "codebuild_role_arn" {
   type        = string
   default     = ""
 }
+
+### BUILD ENVS
+
+variable "ENVIRONMENT" {
+  description = "Environment in which the script is run. Eg: develop, main, etc"
+  type        = string
+}
+
+variable "SKIPVALIDATIONFAILURE" {
+  description = "Skips the validation failures and proceed with terraform apply"
+  type        = string
+  default     = "N"
+}
+
+variable "ENABLE_TFVALIDATE" {
+  description = "Runs a terraform validate if true"
+  type        = string
+  default     = "Y"
+}
+
+variable "ENABLE_TFFORMAT" {
+  description = "Runs a terraform format if true"
+  type        = string
+  default     = "Y"
+}
+
+variable "ENABLE_TFCHECKOV" {
+  description = "Runs checkov if true"
+  type        = string
+  default     = "Y"
+}
+
+variable "ENABLE_TFSEC" {
+  description = "Runs tfsec if true"
+  type        = string
+  default     = "Y"
+}
