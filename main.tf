@@ -25,7 +25,8 @@ resource "aws_codebuild_project" "codebuild_project" {
     type            = "GITHUB"
     location        = var.git_repo
     git_clone_depth = var.git_clone_depth
-    buildspec       = var.build_spec
+    git_submodules_config { fetch_submodules = true }
+    buildspec = var.build_spec
   }
 
   environment {
