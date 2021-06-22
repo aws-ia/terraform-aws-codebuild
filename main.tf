@@ -25,8 +25,10 @@ resource "aws_codebuild_project" "codebuild_project" {
     type            = "GITHUB"
     location        = var.git_repo
     git_clone_depth = var.git_clone_depth
-    git_submodules_config { fetch_submodules = true }
-    buildspec = var.build_spec
+    buildspec       = var.build_spec
+    git_submodules_config {
+      fetch_submodules = true
+    }
   }
 
   environment {
@@ -39,30 +41,6 @@ resource "aws_codebuild_project" "codebuild_project" {
     environment_variable {
       name  = "ENVIRONMENT"
       value = var.environment
-    }
-    environment_variable {
-      name  = "SKIPVALIDATIONFAILURE"
-      value = var.skip_validation_failure
-    }
-    environment_variable {
-      name  = "ENABLE_TFVALIDATE"
-      value = var.enable_tf_validate
-    }
-    environment_variable {
-      name  = "ENABLE_TFFORMAT"
-      value = var.enable_tf_format
-    }
-    environment_variable {
-      name  = "ENABLE_TFCHECKOV"
-      value = var.enable_tf_checkov
-    }
-    environment_variable {
-      name  = "ENABLE_TFSEC"
-      value = var.enable_tf_tfsec
-    }
-    environment_variable {
-      name  = "TF_VERSION"
-      value = var.tf_version
     }
 
   }

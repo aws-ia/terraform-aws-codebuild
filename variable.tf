@@ -34,8 +34,9 @@ variable "compute_type" {
 }
 
 variable "build_spec" {
-  description = "Path to build spec file"
-  default     = "./templates/buildspecs/builddspec_validate.yml"
+  description = "Relative Path to build spec file"
+  default     = "./templates/build_spec/noop.yml"
+
 }
 
 variable "tags" {
@@ -50,6 +51,7 @@ variable "create_role_and_policy" {
 }
 
 variable "codebuild_role_arn" {
+
   description = "ARN of the existing codebuild role"
   type        = string
   default     = ""
@@ -60,34 +62,6 @@ variable "codebuild_role_arn" {
 variable "ENVIRONMENT" {
   description = "Environment in which the script is run. Eg: develop, main, etc"
   type        = string
+  default     = "develop"
 }
 
-variable "SKIPVALIDATIONFAILURE" {
-  description = "Skips the validation failures and proceed with terraform apply"
-  type        = string
-  default     = "N"
-}
-
-variable "ENABLE_TFVALIDATE" {
-  description = "Runs a terraform validate if true"
-  type        = string
-  default     = "Y"
-}
-
-variable "ENABLE_TFFORMAT" {
-  description = "Runs a terraform format if true"
-  type        = string
-  default     = "Y"
-}
-
-variable "ENABLE_TFCHECKOV" {
-  description = "Runs checkov if true"
-  type        = string
-  default     = "Y"
-}
-
-variable "ENABLE_TFSEC" {
-  description = "Runs tfsec if true"
-  type        = string
-  default     = "Y"
-}
