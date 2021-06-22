@@ -10,7 +10,7 @@ variable "artifacts_type" {
 
 variable "project_name" {
   description = "Project Name (Only alpha chars and dashes allowed)"
-  default     = "terraform-examples"
+  default     = "terraform-modules-examples"
 }
 
 variable "git_repo" {
@@ -47,4 +47,10 @@ variable "create_role_and_policy" {
   description = "Create a new IAM role and policy if true"
   type        = bool
   default     = true
+}
+
+variable "codebuild_role_arn" {
+  description = "ARN of the existing codebuild role"
+  type        = string
+  default     = ""
 }

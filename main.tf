@@ -11,8 +11,8 @@ terraform {
 }
 
 resource "aws_codebuild_project" "codebuild_project" {
-  name          = var.git_repo
-  description   = var.git_repo
+  name          = var.project_name
+  description   = var.project_name
   build_timeout = "120"
   service_role  = var.create_role_and_policy ? aws_iam_role.codebuild_role[0].arn : var.codebuild_role_arn
 
@@ -83,6 +83,6 @@ EOF
 }
 
 resource "aws_iam_role_policy_attachment" "codebuild_deploy" {
-  role       = aws_iam_role.codebuild_role.name
+  role       = aws_iam_role.codebuild_role[0].name
   policy_arn = "arn:aws:iam::aws:policy/AdministratorAccess"
 }
