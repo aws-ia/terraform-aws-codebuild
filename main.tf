@@ -14,7 +14,8 @@ resource "aws_codebuild_project" "codebuild_project" {
   name          = var.git_repo
   description   = var.git_repo
   build_timeout = "120"
-  service_role  = aws_iam_role.codebuild_role.arn
+  service_role  = var.create_role_and_policy ? aws_iam_role.codebuild_role[0].arn : var.codebuild_role_arn
+
 
   artifacts {
     type = var.artifacts_type
@@ -62,7 +63,8 @@ resource "aws_codebuild_project" "codebuild_project" {
 
 # IAM
 resource "aws_iam_role" "codebuild_role" {
-  name = "${var.git_repo}_codebuild_deploy_role"
+  count = var.create_role_and_policy ? 1 : 0
+  name  = "${var.project_name}_codebuild_deploy_role"
 
   assume_role_policy = <<EOF
 {

@@ -9,11 +9,13 @@ variable "artifacts_type" {
 }
 
 variable "project_name" {
-  description = "Project Name"
+  description = "Project Name (Only alpha chars and dashes allowed)"
+  default     = "terraform-examples"
 }
 
 variable "git_repo" {
   description = "Github repo "
+  default     = "https://github.com/aws-ia/terraform-modules-examples"
 }
 
 variable "git_clone_depth" {
@@ -39,4 +41,10 @@ variable "build_spec" {
 variable "tags" {
   description = "Codebuild Tags"
   default     = {}
+}
+
+variable "create_role_and_policy" {
+  description = "Create a new IAM role and policy if true"
+  type        = bool
+  default     = true
 }
