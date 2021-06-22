@@ -31,10 +31,6 @@ variable "compute_type" {
   default     = "BUILD_GENERAL1_MEDIUM"
 }
 
-variable "codebuild_logs_bucket" {
-  description = "Codebuild logs bucket"
-}
-
 variable "build_spec" {
   description = "Build spec filename"
   default     = "build_spec.yml"

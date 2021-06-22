@@ -53,8 +53,7 @@ resource "aws_codebuild_project" "codebuild_project" {
     }
 
     s3_logs {
-      status   = "ENABLED"
-      location = "${var.codebuild_logs_bucket}/build_logs"
+      status = "DISABLED"
     }
   }
 
