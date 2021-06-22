@@ -34,8 +34,8 @@ variable "compute_type" {
 }
 
 variable "build_spec" {
-  description = "Build spec filename"
-  default     = "build_spec.yml"
+  description = "Path to build spec file"
+  default     = "./templates/buildspecs/builddspec_validate.yml"
 }
 
 variable "tags" {
