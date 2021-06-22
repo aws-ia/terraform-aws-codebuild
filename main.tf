@@ -37,15 +37,34 @@ resource "aws_codebuild_project" "codebuild_project" {
     privileged_mode             = true
 
     environment_variable {
-      name  = "SOME_KEY1"
-      value = "SOME_VALUE1"
+      name  = "ENVIRONMENT"
+      value = var.environment
+    }
+    environment_variable {
+      name  = "SKIPVALIDATIONFAILURE"
+      value = var.skip_validation_failure
+    }
+    environment_variable {
+      name  = "ENABLE_TFVALIDATE"
+      value = var.enable_tf_validate
+    }
+    environment_variable {
+      name  = "ENABLE_TFFORMAT"
+      value = var.enable_tf_format
+    }
+    environment_variable {
+      name  = "ENABLE_TFCHECKOV"
+      value = var.enable_tf_checkov
+    }
+    environment_variable {
+      name  = "ENABLE_TFSEC"
+      value = var.enable_tf_tfsec
+    }
+    environment_variable {
+      name  = "TF_VERSION"
+      value = var.tf_version
     }
 
-    environment_variable {
-      name  = "SOME_KEY2"
-      value = "SOME_VALUE2"
-      type  = "PARAMETER_STORE"
-    }
   }
 
   logs_config {
