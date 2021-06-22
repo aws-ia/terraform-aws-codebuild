@@ -37,6 +37,7 @@ variable "codebuild_logs_bucket" {
 
 variable "build_spec" {
   description = "Build spec filename"
+  default     = "build_spec.yml"
 }
 
 variable "tags" {
