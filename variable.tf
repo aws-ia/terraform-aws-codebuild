@@ -65,3 +65,19 @@ variable "environment" {
   default     = "develop"
 }
 
+### CODE BUILD ENVIORNMENT VARIABLES
+
+
+variable "codebuild_env_vars" {
+  description = "Environment var for CodeBuild"
+  type = object({
+    LOAD_VARS           = bool
+    EXPORT_PROJECT_NAME = string
+  })
+  default = {
+    LOAD_VARS           = true
+    EXPORT_PROJECT_NAME = "NAME_OF_PROJECT"
+  }
+}
+
+

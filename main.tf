@@ -38,9 +38,12 @@ resource "aws_codebuild_project" "codebuild_project" {
     image_pull_credentials_type = "CODEBUILD"
     privileged_mode             = true
 
-    environment_variable {
-      name  = "ENVIRONMENT"
-      value = var.environment
+    dynamic "environment_variable" {
+      for_each = var.codebuild_env_vars["LOAD_VARS"] != false ? var.codebuild_env_vars : {}
+      content {
+        name  = environment_variable.key
+        value = environment_variable.value
+      }
     }
 
   }
