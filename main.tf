@@ -10,6 +10,7 @@ terraform {
   required_version = ">= 1.0.0"
 }
 
+
 resource "aws_codebuild_project" "codebuild_project" {
   name          = var.project_name
   description   = var.project_name
@@ -25,7 +26,7 @@ resource "aws_codebuild_project" "codebuild_project" {
     type            = "GITHUB"
     location        = var.git_repo
     git_clone_depth = var.git_clone_depth
-    buildspec       = var.build_spec
+    buildspec       = templatefile("${path.module}/${var.build_spec_file}", {})
     git_submodules_config {
       fetch_submodules = true
     }

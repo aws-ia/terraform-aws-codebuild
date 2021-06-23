@@ -34,9 +34,8 @@ variable "compute_type" {
 }
 
 variable "build_spec_file" {
-  description = "Build spec file name "
-  default     = "buildspecs/terraform_env.yml"
-
+  description = " build spec file name "
+  default     = "deploy/buildspecs/terraform_env.yml"
 }
 
 variable "tags" {
@@ -65,12 +64,6 @@ variable "environment" {
   default     = "develop"
 }
 
-# BUILD SPEC TEMPLATE VARIABLES
-variable "TF_VERSION" {
-  type    = string
-  default = "1.0.0"
-}
-
 ### CODE BUILD ENVIORNMENT VARIABLES
 
 
@@ -79,10 +72,12 @@ variable "codebuild_env_vars" {
   type = object({
     LOAD_VARS           = bool
     EXPORT_PROJECT_NAME = string
+    TF_VERSION          = string
   })
   default = {
     LOAD_VARS           = true
-    EXPORT_PROJECT_NAME = "NAME_OF_PROJECT"
+    EXPORT_PROJECT_NAME = "example_deployment"
+    TF_VERSION          = "1.0.0"
   }
 }
 

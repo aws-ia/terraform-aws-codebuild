@@ -1,0 +1,22 @@
+version: 0.2
+env:
+  exported-variables:
+      - ALL_PHASES_STATUS
+
+phases:
+  install:
+    commands:
+        echo "[Install] : $EXPORT_PROJECT_NAME"
+  pre_build:
+    commands:
+      - echo "[Pre Build] : $EXPORT_PROJECT_NAME"
+  build:
+    commands:
+      - echo "[Pre Build] : $EXPORT_PROJECT_NAME"
+      - export ALL_PHASES_STATUS=PASSED
+  post_build:
+    commands:
+        - echo "[Post Build] : $${ALL_PHASES_STATUS}"
+artifacts:
+  files:
+    - '**/*'
