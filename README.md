@@ -34,7 +34,7 @@ Author: Tony Vattahil (tonynv@amazon.com)
 
 ## Deploy the module (Linux or MacOS)
 
-1. Clone the **aws-ia/terraform-aws-codestar** repository.<br>
+1. Clone the **aws-ia/terraform-aws-codebuild** repository.<br>
    `git clone https://github.com/aws-ia/terraform-aws-codebuild`
 
 2. Change to the module root directory.<br>
