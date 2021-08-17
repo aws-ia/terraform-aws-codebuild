@@ -9,6 +9,7 @@ locals {
 
 module "tfcloud" {
   source                = "../"
+  version               = "0.0.2"
   tfe_email             = var.tfe_email
   tfe_organization      = var.tfe_organization
   tfe_workspace         = var.tfe_workspace
