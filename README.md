@@ -32,35 +32,27 @@ Author: Tony Vattahil (tonynv@amazon.com)
 
  **WARNING:** Make sure your credentials are secured outside of version control and follow secrets-management best practices.
 
-# Deploy the module (Linux or Mac)
+## Deploy the module (Linux or MacOS)
 
-Clone the aws-ia/terraform-aws-codebuild repository.
+1. Clone the **aws-ia/terraform-aws-codestar** repository.<br>
+   `git clone https://github.com/aws-ia/terraform-aws-codebuild`
 
-`git clone https://github.com/aws-ia/terraform-aws-codebuild`
+2. Change to the module root directory.<br>
+   `cd terraform-aws-codebuild`
 
-Change directory to the root directory.
+3. Set up your Terraform cloud workspace.<br>
+   `cd setup_workspace` 
 
-cd terraform-aws-codebuild/
+4. Run the following commands in order:<br>
+   `terraform init`<br>
+   `terraform apply`  or `terraform apply  -var-file="$HOME/.aws/terraform.tfvars"`.
+   
+   **Note:** Terraform apply runs remotely in Terraform Cloud.
 
-Change to the deploy directory.
+5. Change to the deploy directory.<br>
+   `cd ../deploy`
 
-`cd setup_workspace`. 
-
-
-Run to following commands in order:
-
-`terraform init`
-
-`terraform apply`  or `terraform apply  -var-file="$HOME/.aws/terraform.tfvars"`.
-
-Change directory to the deploy directory. (The previous command automatically generates backend.hcl.)
-
-`cd ../deploy`
-
-`terraform apply` or `terraform apply  -var-file="$HOME/.aws/terraform.tfvars"`. 
-
-Terraform apply is run remotely in Terraform Cloud.
-
+6. Open **dev.auto.tfvars** and edit the default values to match your environment.
 
 
 
