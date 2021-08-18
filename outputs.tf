@@ -23,3 +23,17 @@ output "codebuild_role_arn" {
   value       = var.create_role_and_policy ? aws_iam_role.codebuild_role[0].arn : var.codebuild_role_arn
 }
 
+output "codebuild_project_name" {
+  description = "CodeBuild Project Name"
+  value       = aws_codebuild_project.codebuild_project.name
+}
+
+
+
+
+
+
+
+
+
+
