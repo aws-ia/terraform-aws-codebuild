@@ -8,8 +8,8 @@ locals {
 # Generate new terraform org and workspace
 
 module "tfcloud" {
-  source                = "../"
   version               = "0.0.2"
+  source                = "aws-ia/cloud_workspace/hashicorp"
   tfe_email             = var.tfe_email
   tfe_organization      = var.tfe_organization
   tfe_workspace         = var.tfe_workspace
