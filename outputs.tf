@@ -13,3 +13,8 @@ output "codebuild_badge_url" {
   value       = aws_codebuild_project.codebuild_project.badge_url
 }
 
+output "codebuild_tags_all" {
+  description = "CodeBuild Badge Url"
+  value       = aws_codebuild_project.codebuild_project.tags_all
+}
+

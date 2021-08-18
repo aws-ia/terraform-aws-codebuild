@@ -60,7 +60,7 @@ resource "aws_codebuild_project" "codebuild_project" {
     }
   }
 
-  tags = var.tags
+  tags = merge(var.tags, { "created_by" = "AWS-ia Terraform Module" })
 }
 
 # IAM
