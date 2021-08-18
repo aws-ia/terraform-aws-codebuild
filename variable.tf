@@ -9,7 +9,7 @@ variable "artifacts_type" {
 }
 
 variable "project_name" {
-  description = "Project Name (Only alpha chars and dashes allowed)"
+  description = "Codebuild Project Name (Leave empty to autogenerate}"
   default     = "example_project"
 }
 

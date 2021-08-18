@@ -30,11 +30,12 @@ module "codebuild" {
 
 module "repo_label" {
   source    = "aws-ia/label/aws"
-  version   = "0.0.1"
+  version   = "0.0.2"
   region    = var.region
-  namespace = var.namespace
-  env       = var.env
-  name      = var.repository_name
-  delimiter = var.delimiter
+  namespace = "aws-ia"
+  account   = "test"
+  env       = "demo"
+  name      = "aws-ia-codebuild_module"
+  delimiter = "-"
   tags      = tomap({ propogate_at_launch = "true", "terraform" = "true" })
 }

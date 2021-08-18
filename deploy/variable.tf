@@ -9,8 +9,8 @@ variable "artifacts_type" {
 }
 
 variable "project_name" {
-  description = "Project Name (Only alpha chars and dashes allowed)"
-  default     = "terraform-modules-examples"
+  description = "Codebuild Project Name (Leave empty to autogenerate}"
+  default     = ""
 }
 
 variable "git_repo" {
@@ -73,11 +73,15 @@ variable "codebuild_env_vars" {
     LOAD_VARS           = bool
     EXPORT_PROJECT_NAME = string
     TF_VERSION          = string
+    TFC                 = bool
+    ENVIORNMENT         = string
   })
   default = {
     LOAD_VARS           = true
     EXPORT_PROJECT_NAME = "example_deployment"
     TF_VERSION          = "1.0.0"
+    TFC                 = true
+    ENVIORNMENT         = "demo"
   }
 }
 

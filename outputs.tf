@@ -18,3 +18,8 @@ output "codebuild_tags_all" {
   value       = aws_codebuild_project.codebuild_project.tags_all
 }
 
+output "codebuild_role_arn" {
+  description = "CodeBuild Role Arn"
+  value       = var.create_role_and_policy ? aws_iam_role.codebuild_role[0].arn : var.codebuild_role_arn
+}
+
