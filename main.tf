@@ -10,10 +10,23 @@ terraform {
   required_version = ">= 1.0.0"
 }
 
+resource "random_string" "rand6" {
+  length  = 6
+  special = false
+  upper   = false
+}
+
+locals {
+  prefix                 = "aws-ia"
+  delimiter              = "-"
+  random_project_name    = "${local.prefix}${local.delimiter}${random_string.rand6.result}"
+  codebuild_project_name = (var.project_name != "" ? var.project_name : "${local.random_project_name}")
+}
+
 
 resource "aws_codebuild_project" "codebuild_project" {
-  name          = var.project_name
-  description   = var.project_name
+  name          = local.codebuild_project_name
+  description   = local.codebuild_project_name
   build_timeout = "120"
   service_role  = var.create_role_and_policy ? aws_iam_role.codebuild_role[0].arn : var.codebuild_role_arn
 
@@ -66,7 +79,7 @@ resource "aws_codebuild_project" "codebuild_project" {
 # IAM
 resource "aws_iam_role" "codebuild_role" {
   count = var.create_role_and_policy ? 1 : 0
-  name  = "${var.project_name}_codebuild_deploy_role"
+  name  = "${"${local.codebuild_project_name}"}_codebuild_deploy_role"
 
   assume_role_policy = <<EOF
 {

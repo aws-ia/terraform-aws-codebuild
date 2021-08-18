@@ -10,7 +10,7 @@ variable "artifacts_type" {
 
 variable "project_name" {
   description = "Project Name (Only alpha chars and dashes allowed)"
-  default     = "terraform-modules-examples"
+  default     = "example_project"
 }
 
 variable "git_repo" {
