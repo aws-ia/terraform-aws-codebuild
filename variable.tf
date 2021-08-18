@@ -41,7 +41,7 @@ variable "build_spec_file" {
 
 variable "tags" {
   description = "Codebuild Tags"
-  default     = {}
+  default     = { "Name" = "aws-ia-codebuild" }
 }
 
 variable "create_role_and_policy" {
