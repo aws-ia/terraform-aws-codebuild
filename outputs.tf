@@ -3,3 +3,8 @@ output "codebuild_arn" {
   value       = aws_codebuild_project.codebuild_project.arn
 }
 
+output "codebuild_id" {
+  description = "CodeBuild Id"
+  value       = aws_codebuild_project.codebuild_project.id
+}
+
