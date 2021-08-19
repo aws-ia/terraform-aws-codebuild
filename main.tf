@@ -39,7 +39,7 @@ resource "aws_codebuild_project" "codebuild_project" {
     type            = "GITHUB"
     location        = var.git_repo
     git_clone_depth = var.git_clone_depth
-    buildspec       = templatefile("${path.module}/${var.build_spec_file}", {})
+    buildspec       = templatefile("${path.cwd}/${var.build_spec_file}", {})
     git_submodules_config {
       fetch_submodules = true
     }

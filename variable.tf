@@ -14,7 +14,7 @@ variable "project_name" {
 }
 
 variable "git_repo" {
-  description = "Github repo "
+  description = "Github repo (FullPath for to pull via git clone) "
   default     = "https://github.com/aws-ia/terraform-modules-examples"
 }
 
