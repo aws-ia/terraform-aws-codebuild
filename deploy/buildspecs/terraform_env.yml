@@ -1,134 +1,23 @@
 version: 0.2
 env:
   exported-variables:
-    - VALIDATION_OVERVIEW
-    - TF_VALIDATE_OUTPUT
-    - TF_FORMAT_OUTPUT
-    - TF_CHECKOV_OUTPUT
-    - TF_TFSEC_OUTPUT
-    - PLAN_STATUS
+      - ALL_PHASES_STATUS
+      - TERRAFORM_CLOUD
 
 phases:
   install:
-    runtime-versions:
-      python: "3.7"
-      golang: "1.14"
     commands:
-      - "curl -s -qL -o terraform.zip https://releases.hashicorp.com/terraform/$${TF_VERSION}/terraform_$${TF_VERSION}_linux_amd64.zip"
-      - "unzip -o terraform.zip"
-      - mv terraform /bin
-      - rm terraform.zip
-      - pip3 install checkov
-      - go get -u github.com/tfsec/tfsec/cmd/tfsec
-      - set echo off
-
-        echo "INFO : Pre-Validation Successful"
-      - # -------------- END of PRE VALIDATION Steps  ----------------
-      - set echo on
+        echo "[Install] : $EXPORT_PROJECT_NAME"
   pre_build:
     commands:
-      - "echo ## VALIDATION : Starting ..."
-      - "echo ## TERRAFORM INIT : Initialize the Terraform Enviornment"
-      - "terraform init"
-      - |
-        # ----------   Terraform Validate ----------
-        if [ "$${ENABLE_TFVALIDATE}" = "Y" ]
-        then
-            echo "## VALIDATION : Validating Terraform code ..."
-            terraform validate
-        fi
-        tfValidateOutput=$?
-        if [ "$$tfValidateOutput" -eq 1 ]
-        then
-            tfValidateOutput="FAILED"
-        else
-            tfValidateOutput="PASSED"
-        fi
-        export TF_VALIDATE_OUTPUT=$tfValidateOutput
-        # ----------   Terraform Format ----------
-        if [ "$${ENABLE_TFFORMAT}" = "Y" ]
-        then
-            echo "## VALIDATION : Formatting Terraform code ..."
-            terraform fmt -recursive
-        fi
-        tfFormatOutput=$?
-        if [ "$$tfFormatOutput" -eq 1 ]
-        then
-            tfFormatOutput="FAILED"
-        else
-            tfFormatOutput="PASSED"
-        fi
-        export TF_FORMAT_OUTPUT=$tfFormatOutput
-        # ----------   Terraform Checkov ----------
-        if [ "$${ENABLE_TFCHECKOV}" = "Y" ]
-        then
-            echo "## VALIDATION: Running checkov ..."
-            checkov -s -d .
-        fi
-        tfCheckovOutput=$?
-        if [ "$$tfCheckovOutput" -eq 1 ]
-        then
-            tfCheckovOutput="FAILED"
-        else
-          tfCheckovOutput="PASSED"
-        fi
-        export TF_CHECKOV_OUTPUT=$tfCheckovOutput
-        # ----------   Terraform TFSEC ----------
-        if [ "$${ENABLE_TFSEC}" = "Y" ]
-        then
-          echo "## VALIDATION: Running tfsec ...";
-          tfsec .
-        fi
-        tfTfsecOutput=$?
-        if [ "$$tfTfsecOutput" -eq 1 ]
-        then
-          tfTfsecOutput="FAILED"
-        else
-          tfTfsecOutput="PASSED"
-        fi
-        export TF_TFSEC_OUTPUT=$tfTfsecOutput
-        echo "## VALIDATION Summary ##"
-        echo "------------------------"
-        echo "Terraform Validate: $${tfValidateOutput}"
-        echo "Terraform Format: $${tfFormatOutput}"
-        echo "Terraform checkov: $${tfCheckovOutput}"
-        echo "Terraform tfsec: $${tfTfsecOutput}"
-        echo "------------------------"
-        # if SKIPVALIDATIONFAILURE is set as Y, then validation failures are skipped during execution
-        if [ "$${SKIPVALIDATIONFAILURE}" = "Y" ]
-        then
-          echo "## VALIDATION: Skipping validation failure checks..."
-          validation_failure=0
-          VALIDATION_OVERVIEW=SKIPPED
-        elif [ "$${tfValidateOutput}" = "PASSED" -a "$${tfFormatOutput}" = "PASSED" -a "$${tfCheckovOutput}" = "PASSED"  -a "$${tfTfsecOutput}" = "PASSED" ]
-        then
-            echo "## VALIDATION: Checks Passed!!!"
-            validation_failure=0
-            export VALIDATION_OVERVIEW=PASSED
-        else
-          echo "## ERROR: Validation Failed"
-          export VALIDATION_OVERVIEW=FAILED
-          validation_failure=1
-        fi
-        if [ "$${validation_failure}" -eq 1 -a "$${SKIPVALIDATIONFAILURE}" != "Y" ]
-        then
-            exit 1
-        fi
+      - echo "[Pre Build] : $EXPORT_PROJECT_NAME"
   build:
     commands:
-      - "echo ## TERRAFORM PLAN : Create the plan for the Infrastructure"
-      - "terraform plan -out tfapply"
-      - "plan_status=$$?"
-      - |
-        if [ "$${plan_status}" -eq 0 ]
-        then
-              export PLAN_STATUS=PASSED
-        else
-          export PLAN_STATUS=FAILED
-        fi
+      - echo "[Pre Build] : $EXPORT_PROJECT_NAME"
+      - export ALL_PHASES_STATUS=PASSED
   post_build:
     commands:
-      - echo "Cleaning up the infrastructure created in next step"
+        - echo "[Post Build] : $${ALL_PHASES_STATUS}"
 artifacts:
   files:
     - '**/*'

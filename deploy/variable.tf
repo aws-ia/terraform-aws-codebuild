@@ -13,8 +13,9 @@ variable "project_name" {
   default     = ""
 }
 
-variable "git_repo" {
-  description = "Github repo "
+variable "http_git_clone_url" {
+  description = "Enter: Git Clone URL"
+  type        = string
   default     = "https://github.com/aws-ia/terraform-modules-examples"
 }
 
@@ -35,7 +36,7 @@ variable "compute_type" {
 
 variable "build_spec_file" {
   description = " build spec file name "
-  default     = "deploy/buildspecs/terraform_env.yml"
+  default     = "/buildspecs/terraform_env.yml"
 }
 
 variable "tags" {

@@ -18,11 +18,6 @@ output "codebuild_tags_all" {
   value       = module.codebuild.codebuild_tags_all
 }
 
-output "codebuild_role_arn" {
-  description = "CodeBuild Role Arn"
-  value       = module.codebuild.codebuild_role_arn
-}
-
 output "codebuild_project_name" {
   description = "CodeBuild Project Name"
   value       = module.codebuild.codebuild_project_name
