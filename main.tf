@@ -1,4 +1,4 @@
-#########
+##########
 # Defaults
 ##########
 
@@ -17,9 +17,11 @@ resource "random_string" "rand6" {
 }
 
 locals {
-  prefix                 = "aws-ia"
-  delimiter              = "-"
-  random_project_name    = "${local.prefix}${local.delimiter}${random_string.rand6.result}"
+  git_provider           = element(split("/", var.http_git_clone_url), 2)
+  git_protocal           = element(split(":", var.http_git_clone_url), 0)
+  git_owner              = element(split("/", var.http_git_clone_url), 3)
+  git_repo               = trimsuffix(element(split("/", var.http_git_clone_url), 4), ".git")
+  random_project_name    = "${local.git_repo}-${random_string.rand6.result}"
   codebuild_project_name = (var.project_name != "" ? var.project_name : "${local.random_project_name}")
 }
 
@@ -37,7 +39,7 @@ resource "aws_codebuild_project" "codebuild_project" {
 
   source {
     type            = "GITHUB"
-    location        = var.git_repo
+    location        = "${local.git_protocal}://${local.git_provider}/${local.git_owner}/${local.git_repo}.git"
     git_clone_depth = var.git_clone_depth
     buildspec       = templatefile("${path.cwd}/${var.build_spec_file}", {})
     git_submodules_config {
@@ -101,3 +103,4 @@ resource "aws_iam_role_policy_attachment" "codebuild_deploy" {
   role       = aws_iam_role.codebuild_role[0].name
   policy_arn = "arn:aws:iam::aws:policy/AdministratorAccess"
 }
+

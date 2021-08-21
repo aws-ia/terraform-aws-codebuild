@@ -13,27 +13,19 @@ output "codebuild_badge_url" {
   value       = aws_codebuild_project.codebuild_project.badge_url
 }
 
-output "codebuild_tags_all" {
-  description = "CodeBuild Badge Url"
-  value       = aws_codebuild_project.codebuild_project.tags_all
-}
-
-output "codebuild_role_arn" {
-  description = "CodeBuild Role Arn"
-  value       = var.create_role_and_policy ? aws_iam_role.codebuild_role[0].arn : var.codebuild_role_arn
-}
-
 output "codebuild_project_name" {
   description = "CodeBuild Project Name"
   value       = aws_codebuild_project.codebuild_project.name
 }
 
+output "git_repo_name" {
+  description = "GitRepo Name"
+  value       = local.git_repo
+}
 
-
-
-
-
-
-
+output "codebuild_tags_all" {
+  description = "CodeBuild Badge Url"
+  value       = aws_codebuild_project.codebuild_project.tags_all
+}
 
 
