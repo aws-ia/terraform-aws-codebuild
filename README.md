@@ -22,11 +22,11 @@ Author: Tony Vattahil (tonynv@amazon.com)
       
 **Example .tfvars file contents**
 
-   In the following example, replace asterisks with your AKEY and SKEY.
+   Replace the sample values in the example with your own values.
    ```
-   AWS_SECRET_ACCESS_KEY = "*****************"
-   AWS_ACCESS_KEY_ID = "*****************"
-   AWS_SESSION_TOKEN = "*****************"
+   AWS_SECRET_ACCESS_KEY = "<AKIAIOSFODNN7EXAMPLE>"
+   AWS_ACCESS_KEY_ID = "<wJalrXUtnFEMI/K7MDENG/bPxRfiCYEXAMPLEKEY>"
+   AWS_SESSION_TOKEN = "AQoDYXdzEJr...<remainder of security token>"
    ```
  **Note:** STS-based credentials are optional but highly recommended. 
 
