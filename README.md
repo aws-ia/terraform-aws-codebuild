@@ -52,7 +52,7 @@ Author: Tony Vattahil (tonynv@amazon.com)
 5. Change to the deploy directory.<br>
    `cd ../deploy`
 
-6. Open **dev.auto.tfvars** and edit the default values to match your environment.
+6. Open **dev.auto.tfvars** and edit the default values to suit your environment.
 
 
 
