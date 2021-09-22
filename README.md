@@ -3,69 +3,56 @@ This module deploys Terraform-managed AWS CodeBuild.
 
 Author: Tony Vattahil (tonynv@amazon.com)
 
-# Install Terraform
-To deploy this module you must install Terraform. See [Install Terraform](https://learn.hashicorp.com/tutorials/terraform/install-cli) for a tutorial. 
+## Prerequisites
+1. Install Terraform. See [Install Terraform](https://learn.hashicorp.com/tutorials/terraform/install-cli) for a tutorial. 
+2. Sign up and log into [Terraform Cloud](https://app.terraform.io/signup/account). There is a free tier available.
 
-# Sign up for Terraform Cloud
-Sign up and log into [Terraform Cloud](https://app.terraform.io/signup/account). (There is a free tier available.)
+## Configure Terraform Cloud API access
 
-## Configure Terraform Cloud API Access
+1. Generate a Terraform Cloud token.<br>
+   `terraform login`
 
-Generate a Terraform Cloud token.
+2. Export the `TERRAFORM_CONFIG` variable.<br>
+   `export TERRAFORM_CONFIG="$HOME/.terraform.d/credentials.tfrc.json"`
 
-`terraform login` 
+## Configure your .tfvars file
+   
+**Example file path**<br>
+   `$HOME/.aws/terraform.tfvars`
+      
+**Example .tfvars file contents**
 
-Export the TERRAFORM_CONFIG variable.
+   Replace the sample values in the example with your own values.
+   ```
+   AWS_SECRET_ACCESS_KEY = "<AKIAIOSFODNN7EXAMPLE>"
+   AWS_ACCESS_KEY_ID = "<wJalrXUtnFEMI/K7MDENG/bPxRfiCYEXAMPLEKEY>"
+   AWS_SESSION_TOKEN = "AQoDYXdzEJr...<remainder of security token>"
+   ```
+ **Note:** STS-based credentials are optional but highly recommended. 
 
-`export TERRAFORM_CONFIG="$HOME/.terraform.d/credentials.tfrc.json"`
+ **WARNING:** Make sure your credentials are secured outside of version control and follow secrets-management best practices.
 
-# Configure your tfvars file
+## Deploy the module (Linux or MacOS)
 
-_Example filepath_ = `$HOME/.aws/terraform.tfvars`
+1. Clone the **aws-ia/terraform-aws-codebuild** repository.<br>
+   `git clone https://github.com/aws-ia/terraform-aws-codebuild`
 
-_Example tfvars file contents_ 
+2. Change to the module root directory.<br>
+   `cd terraform-aws-codebuild`
 
-In the example, replace *** with your AKEY and SKEY.
+3. Set up your Terraform cloud workspace.<br>
+   `cd setup_workspace` 
 
-```
-AWS_SECRET_ACCESS_KEY = "*****************"
-AWS_ACCESS_KEY_ID = "*****************"
-AWS_SESSION_TOKEN = "*****************"
-```
+4. Run the following commands in order:<br>
+   `terraform init`<br>
+   `terraform apply`  or `terraform apply  -var-file="$HOME/.aws/terraform.tfvars"`.
+   
+   **Note:** Terraform apply runs remotely in Terraform Cloud.
 
-Note: STS-based credentials are optional but highly recommended. 
+5. Change to the deploy directory.<br>
+   `cd ../deploy`
 
-> !!!!CAUTION!!!!: Make sure your credentials are secured outside of version control and follow secrets-management best practices.
-
-# Deploy the module (Linux or Mac)
-
-Clone the aws-ia/terraform-aws-codebuild repository.
-
-`git clone https://github.com/aws-ia/terraform-aws-codebuild`
-
-Change directory to the root directory.
-
-cd terraform-aws-codebuild/
-
-Change to the deploy directory.
-
-`cd setup_workspace`. 
-
-
-Run to following commands in order:
-
-`terraform init`
-
-`terraform apply`  or `terraform apply  -var-file="$HOME/.aws/terraform.tfvars"`.
-
-Change directory to the deploy directory. (The previous command automatically generates backend.hcl.)
-
-`cd ../deploy`
-
-`terraform apply` or `terraform apply  -var-file="$HOME/.aws/terraform.tfvars"`. 
-
-Terraform apply is run remotely in Terraform Cloud.
-
+6. Open **dev.auto.tfvars** and edit the default values to suit your environment.
 
 
 
